@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws LimitException {
+    public static void main(String[] args)  {
         BankAccount bankAccount = new BankAccount();
         bankAccount.deposit(20000);
         System.out.println("На вашем счете: " + bankAccount.getAmount() + " coм.");
@@ -19,15 +19,14 @@ public class Main {
                 bankAccount.withdraw(m);
             } catch (LimitException e) {
                 System.out.println(e.getMessage());
-                System.out.println(bankAccount.getAmount() - bankAccount.getAmount());
-
-                bankAccount.withdraw((int) bankAccount.getAmount());
-            } finally {
-                if (bankAccount.getAmount() == 0) {
-
-                    break;
+                try {
+                    bankAccount.withdraw((int) bankAccount.getAmount());
+                } catch (LimitException limitException) {
+                    limitException.printStackTrace();
                 }
+                break;
+            }
             }
         }
     }
-}
+

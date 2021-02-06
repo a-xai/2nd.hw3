@@ -8,15 +8,15 @@ public class BankAccount {
     }
 
     public double deposit(int sum) {
-        return amount = sum;
+        return amount += sum;
     }
 
     public void withdraw(int sum) throws LimitException {
-        if (amount > sum) {
-            amount = amount - sum;
-        } else {
+        if (amount < sum) {
             throw new LimitException("У вас недостаточно денег на счету. \nСчитано с карты: " + amount, amount);
         }
+        amount -= sum;
+
 
     }
 }
